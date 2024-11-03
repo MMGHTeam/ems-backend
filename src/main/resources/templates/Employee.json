@@ -1,0 +1,12 @@
+{
+    "firstName": "Ramin",
+    "lastName": "Eslami",
+    "email": "R.Eslami@work.com",
+    "birthDate": "2004-10-03",
+    "startDate": "2024-01-01",
+    "educationLevel": "Masters",
+    "salary": "12000",
+    "type": "IT",
+    "department": "DevOps",
+    "nationality": "FR"
+  }
