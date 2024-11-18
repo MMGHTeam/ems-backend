@@ -17,7 +17,8 @@ public class EmployeeMapper {
             employee.getSalary(),
             employee.getType(),
             employee.getDepartment(),
-            employee.getNationality()
+            employee.getNationality(),
+            employee.getStatus()
         );
     }
 
@@ -33,7 +34,8 @@ public class EmployeeMapper {
             employeeDto.getSalary(),
             employeeDto.getType(),
             employeeDto.getDepartment(),
-            employeeDto.getNationality()
+            employeeDto.getNationality(),
+            employeeDto.getStatus()
         );
     }
 

@@ -39,5 +39,7 @@ public class Employee {
     private String type;
     private String department;
     private String nationality;
+    private Boolean status;
+    
 
 }

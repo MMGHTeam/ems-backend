@@ -8,5 +8,6 @@
     "salary": "12000",
     "type": "IT",
     "department": "DevOps",
-    "nationality": "FR"
+    "nationality": "FR",
+    "status": true
   }
