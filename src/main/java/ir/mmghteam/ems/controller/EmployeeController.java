@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 // Normal Flow:
 // 1. Add service function body
 // 2. Implement the function details
-// 3. set Contoller url and related annotation
+// 3. Set Contoller url and related annotation
 
 
 @RestController
