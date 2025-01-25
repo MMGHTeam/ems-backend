@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ir.mmghteam.ems.dto.EmployeeDto;
 import ir.mmghteam.ems.entity.Employee;
 import ir.mmghteam.ems.exception.ResourceNotFoundException;
+import ir.mmghteam.ems.exception.UpdateNotAllowedException;
 import ir.mmghteam.ems.mapper.EmployeeMapper;
 import ir.mmghteam.ems.repository.EmployeeRepository;
 import ir.mmghteam.ems.service.EmployeeService;
@@ -44,6 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employees = employeeRepository.findAll();
 
         return employees.stream()
+                         .filter(employee -> employee.getStatus() == true)
                          .map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
                          .collect(Collectors.toList());
         
@@ -56,6 +58,11 @@ public class EmployeeServiceImpl implements EmployeeService {
                           .orElseThrow(
                             () -> new ResourceNotFoundException("Employee no: " + employeeId + ",does not exist!")
                           );
+        // check for the employees status 
+        // not active employees records should not be updated
+        if(!employee.getStatus()){
+             throw new UpdateNotAllowedException("Employee no: " + employeeId + " is not Active and can not be updated!");
+        }
         employee.setFirstName(updatedEmployee.getFirstName());
         employee.setLastName(updatedEmployee.getLastName());
         employee.setBirthDate(updatedEmployee.getBirthDate());
@@ -82,6 +89,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         );
 
         employeeRepository.deleteById(employeeId);
+    }
+
+    @Override
+    public EmployeeDto safeDeleteEmployee(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId)
+        .orElseThrow(
+          () -> new ResourceNotFoundException("Employee no: " + employeeId + ",does not exist!")
+        );
+
+        employee.setStatus(false);
+
+        Employee safeDeletedEmployee = employeeRepository.save(employee);
+
+        return EmployeeMapper.mapToEmployeeDto(safeDeletedEmployee);
+
     }
 
 }

@@ -68,6 +68,15 @@ public class EmployeeController {
 
         return ResponseEntity.ok("Employee no: " + employeeId + ", has been deleted!");
     }
+
+    //safe delete employee (set status to 0)
+    @PutMapping("delete/{id}")
+    public ResponseEntity<EmployeeDto> safeDeleteEmployee(@PathVariable("id") Long employeeId,
+                                                          @RequestBody EmployeeDto safeDeletedEmployee) {
+        EmployeeDto employeeDto = employeeService.safeDeleteEmployee(employeeId);
+
+        return ResponseEntity.ok(employeeDto);
+    }
     
     
     
