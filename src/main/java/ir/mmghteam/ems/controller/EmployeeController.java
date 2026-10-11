@@ -2,6 +2,7 @@ package ir.mmghteam.ems.controller;
 
 import java.util.List;
 
+import ir.mmghteam.ems.mapper.EmployeeMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/api/employees")
 public class EmployeeController {
     private EmployeeService employeeService;
+
+    // Create new employee
     @PostMapping
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto){
         EmployeeDto savedEmployee = employeeService.createEmployee(employeeDto);
